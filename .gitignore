@@ -58,3 +58,4 @@ target/
 
 # pycharm
 .idea/
+ilazy_web/db.sqlite3

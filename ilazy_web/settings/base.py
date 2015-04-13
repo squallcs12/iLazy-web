@@ -57,6 +57,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'api.midleware.wait.Wait5SecForLocalMiddleware',
 )
 
 ROOT_URLCONF = 'ilazy_web.urls'

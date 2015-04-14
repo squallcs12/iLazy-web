@@ -17,7 +17,7 @@ class FilterContains(object):
         value = request.GET.get(self.field)
         if value:
             query_filter = {
-                "%s__contains" % self.field: value
+                "%s__contains" % self.field: value.lower()
             }
             queryset = queryset.filter(**query_filter)
         return queryset

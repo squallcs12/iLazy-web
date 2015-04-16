@@ -1,3 +1,4 @@
+from accounts.factories import UserFactory
 from api import models
 import factory
 import faker
@@ -24,3 +25,15 @@ class AppFactory(factory.django.DjangoModelFactory):
     name = factory.Sequence(lambda n: "App nam %s" % n)
     site = factory.Sequence(lambda n: SITES[n % len(SITES)])
     price = factory.Sequence(lambda n: fake.random_int(max=999) + fake.random_int(min=10, max=99) / 100.)
+    command = factory.Sequence(lambda n: fake.lexify(text="??????????"))
+
+
+class UserAppFactory(factory.django.DjangoModelFactory):
+
+    class Meta:
+        model = models.UserApp
+        django_get_or_create = ('user', 'app')
+
+    user = factory.SubFactory(UserFactory)
+    app = factory.SubFactory(AppFactory)
+

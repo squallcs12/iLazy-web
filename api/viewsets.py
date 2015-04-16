@@ -29,6 +29,13 @@ class RetrieveModelMixin(object):
     Retrieve a model instance.
     """
     name_single = None
+    serializer_class_single = None
+
+    def get_serializer_single(self, *args, **kwargs):
+        if self.serializer_class_single is None:
+            return self.get_serializer(*args, **kwargs)
+        kwargs['context'] = self.get_serializer_context()
+        return self.serializer_class_single(*args, **kwargs)
 
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
@@ -36,7 +43,7 @@ class RetrieveModelMixin(object):
         if self.name_single is None:
             self.name_single = instance.__class__.__name__.lower()
 
-        serializer = self.get_serializer(instance)
+        serializer = self.get_serializer_single(instance)
         return Response({
             self.name_single: serializer.data
         })
@@ -46,4 +53,13 @@ class ReadOnlyModelViewSet(RetrieveModelMixin,
                            ListModelMixin,
                            viewsets.GenericViewSet
                            ):
+    pass
+
+
+class ModelViewSet(mixins.CreateModelMixin,
+                   RetrieveModelMixin,
+                   mixins.UpdateModelMixin,
+                   mixins.DestroyModelMixin,
+                   ListModelMixin,
+                   viewsets.GenericViewSet):
     pass

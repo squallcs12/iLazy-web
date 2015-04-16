@@ -7,4 +7,10 @@ class AppAdmin(admin.ModelAdmin):
     search_fields = ('id', 'name', 'site')
 
 
+class UserAppAdmin(admin.ModelAdmin):
+    list_display = ('id', 'user', 'app')
+    search_fields = ('id', 'app__name', 'user__username')
+
+
 admin.site.register(models.App, AppAdmin)
+admin.site.register(models.UserApp, UserAppAdmin)

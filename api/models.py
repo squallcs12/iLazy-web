@@ -5,8 +5,8 @@ from django.db import models
 class App(models.Model):
     name = models.CharField(max_length=255)
     site = models.CharField(max_length=255)
-    price = models.DecimalField(max_digits=5, decimal_places=2)
-    price_life = models.DecimalField(max_digits=5, decimal_places=2, default=10.0)
+    price = models.IntegerField()
+    price_life = models.IntegerField()
     introduction = models.TextField(default='')
     request_sites = models.TextField(default='')
     require_params = models.TextField(default='')

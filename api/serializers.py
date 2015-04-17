@@ -5,7 +5,6 @@ from api.response import Response
 
 
 class AppSerializer(serializers.HyperlinkedModelSerializer):
-    price = serializers.DecimalField(max_digits=5, decimal_places=2, coerce_to_string=False)
 
     class Meta:
         model = models.App
@@ -13,8 +12,6 @@ class AppSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class AppDetailSerializer(serializers.HyperlinkedModelSerializer):
-    price = serializers.DecimalField(max_digits=5, decimal_places=2, coerce_to_string=False)
-    price_life = serializers.DecimalField(max_digits=5, decimal_places=2, coerce_to_string=False)
 
     class Meta:
         model = models.App

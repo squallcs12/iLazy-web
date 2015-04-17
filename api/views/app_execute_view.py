@@ -9,6 +9,17 @@ from api.tasks import execute_app
 
 class AppExecuteView(APIView):
     def post(self, request):
+        """
+        Execute app from user
+        ---
+        response_serializer: api.serializers.ResultSerializer
+
+        parameters:
+            - name: app
+              type: integer
+            - name: params
+              type: string
+        """
         form = AppExecuteForm(request.POST)
         if not form.is_valid():
             return HttpResponseBadRequest()

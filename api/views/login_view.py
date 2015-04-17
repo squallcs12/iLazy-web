@@ -20,6 +20,15 @@ class LoginView(APIView):
 
     @method_decorator(csrf_exempt)
     def post(self, request):
+        """
+        Login into system
+        ---
+        parameters:
+            - name: username
+              type: string
+            - name: password
+              type: string
+        """
         form = AuthenticationForm(request, request.POST)
         if not form.is_valid():
             return Response({

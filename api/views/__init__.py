@@ -1,22 +1,6 @@
-from rest_framework import routers, serializers
-from api import viewsets, models
+from rest_framework import routers
 
-
-class AppSerializer(serializers.HyperlinkedModelSerializer):
-    price = serializers.DecimalField(max_digits=5, decimal_places=2, coerce_to_string=False)
-
-    class Meta:
-        model = models.App
-        fields = ('id', 'name', 'site', 'price')
-
-
-class AppDetailSerializer(serializers.HyperlinkedModelSerializer):
-    price = serializers.DecimalField(max_digits=5, decimal_places=2, coerce_to_string=False)
-    price_life = serializers.DecimalField(max_digits=5, decimal_places=2, coerce_to_string=False)
-
-    class Meta:
-        model = models.App
-        fields = ('id', 'name', 'site', 'price', 'price_life', 'introduction', 'request_sites', 'require_params')
+from api import viewsets, models, serializers
 
 
 def filter_contain(field):
@@ -34,14 +18,14 @@ def filter_contain(field):
 
 class AppViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = models.App.objects.all()
-    serializer_class = AppSerializer
-    serializer_class_single = AppDetailSerializer
+    serializer_class = serializers.AppSerializer
+    serializer_class_single = serializers.AppDetailSerializer
     filter_backends = (filter_contain('site'), )
 
 
 class MyAppViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = models.App.objects.all()
-    serializer_class = AppDetailSerializer
+    serializer_class = serializers.AppDetailSerializer
 
     def get_queryset(self):
         user_app_ids = self.request.user.userapp_set.all().values_list('app_id')

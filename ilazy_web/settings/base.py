@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'rest_framework',
     'oauth2_provider',
     'django_extensions',
+    'rest_framework_swagger',
 
     'accounts',
     'api',
@@ -124,4 +125,5 @@ REST_FRAMEWORK = {
     ),
 }
 
+BROKER_URL = 'redis://localhost:6379/0'
 

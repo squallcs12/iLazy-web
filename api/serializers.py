@@ -15,7 +15,8 @@ class AppDetailSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = models.App
-        fields = ('id', 'name', 'site', 'price', 'price_life', 'introduction', 'request_sites', 'require_params')
+        fields = ('id', 'name', 'site', 'price', 'price_life', 'introduction', 'request_sites', 'require_params',
+                  'responses')
 
 
 class ResultSerializer(serializers.HyperlinkedModelSerializer):

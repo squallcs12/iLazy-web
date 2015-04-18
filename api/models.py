@@ -11,6 +11,7 @@ class App(models.Model):
     request_sites = models.TextField(default='')
     require_params = models.TextField(default='')
     command = models.CharField(max_length=255, default='')
+    responses = models.TextField(default='')
 
     def __str__(self):
         return self.name

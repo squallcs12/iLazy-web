@@ -4,4 +4,5 @@ from accounts.models import User
 
 class Command(NoArgsCommand):
     def handle_noargs(self, **options):
-        User.objects.create_superuser('admin', 'bang.dao@eastagile.com', 'admin123')
+        if not User.objects.filter(username='admin').count():
+            User.objects.create_superuser('admin', 'bang.dao@eastagile.com', 'admin123')

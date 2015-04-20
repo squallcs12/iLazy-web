@@ -1,3 +1,5 @@
+from datetime import timedelta
+from django.utils import timezone
 from accounts.factories import UserFactory
 from api import models
 import factory
@@ -24,7 +26,8 @@ class AppFactory(factory.django.DjangoModelFactory):
 
     name = factory.Sequence(lambda n: "App nam %s" % n)
     site = factory.Sequence(lambda n: SITES[n % len(SITES)])
-    price = factory.Sequence(lambda n: fake.random_int(max=999) + fake.random_int(min=10, max=99) / 100.)
+    price = factory.Sequence(lambda n: fake.random_int(max=999))
+    price_life = factory.LazyAttribute(lambda o: fake.random_int(max=999) + o.price)
     command = factory.Sequence(lambda n: fake.lexify(text="??????????"))
 
 
@@ -36,4 +39,5 @@ class UserAppFactory(factory.django.DjangoModelFactory):
 
     user = factory.SubFactory(UserFactory)
     app = factory.SubFactory(AppFactory)
+    expires = factory.Sequence(lambda n: timezone.now().date() + timedelta(days=30))
 

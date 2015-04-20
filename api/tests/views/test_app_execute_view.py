@@ -1,10 +1,10 @@
 from faker import Faker
 import mock
-from rest_framework.test import APITestCase
 
 from accounts.factories import UserFactory
 from api.factories import AppFactory, UserAppFactory
 from api.models import Result
+from api.tests.core import APITestCase
 
 
 fake = Faker()
@@ -13,12 +13,6 @@ fake = Faker()
 class AppExecuteViewTestCase(APITestCase):
     """Test app run via API request
     """
-
-    def login(self, user):
-        self.client.login(username=user.username, password=user.raw_password)
-
-    def error_messages(self, response):
-        return [o['message'] for o in response.data['errors']]
 
     def setUp(self):
         self.user = UserFactory()

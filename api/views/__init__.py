@@ -34,4 +34,4 @@ class MyAppViewSet(viewsets.ReadOnlyModelViewSet):
 
 router = routers.DefaultRouter()
 router.register(r'apps', AppViewSet)
-router.register(r'my_apps', MyAppViewSet)
+router.register(r'my_apps', MyAppViewSet, base_name='my_app')

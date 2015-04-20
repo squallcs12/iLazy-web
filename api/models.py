@@ -20,6 +20,7 @@ class App(models.Model):
 class UserApp(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     app = models.ForeignKey(App)
+    expires = models.DateField(null=True)
 
     class Meta:
         unique_together = (('user', 'app'), )
@@ -29,3 +30,14 @@ class Result(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     app = models.ForeignKey(App)
     result = models.TextField(default='')
+
+
+class UserCoinsHistory(models.Model):
+    KIND_BUY_APP = 1
+    kind_choices = [(KIND_BUY_APP, 'Buy App')]
+
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    refer_id = models.IntegerField()
+    cost = models.IntegerField()
+    remain = models.IntegerField()
+    kind = models.IntegerField(choices=kind_choices)

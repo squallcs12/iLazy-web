@@ -13,7 +13,7 @@ class UserAppAdmin(admin.ModelAdmin):
 
 
 class UserCoinsHistoryAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user', 'app', 'cost', 'remain', 'kind', 'refer_id')
+    list_display = ('id', 'user', 'date', 'cost', 'remain', 'kind', 'refer_id')
 
 
 admin.site.register(models.App, AppAdmin)

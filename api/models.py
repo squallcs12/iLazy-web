@@ -41,3 +41,4 @@ class UserCoinsHistory(models.Model):
     cost = models.IntegerField()
     remain = models.IntegerField()
     kind = models.IntegerField(choices=kind_choices)
+    date = models.DateTimeField(auto_now_add=True)

@@ -34,4 +34,10 @@ class UserAppSerializer(serializers.ModelSerializer):
         fields = ('id', 'user', 'app', 'expires', 'expires_str')
 
 
+class OrderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Order
+        fields = ('id', 'user', 'website', 'steps', 'email', 'price')
+
+
 Response.register_serializers(AppSerializer, AppDetailSerializer, ResultSerializer, UserAppSerializer)

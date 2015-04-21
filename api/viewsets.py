@@ -1,4 +1,5 @@
-from rest_framework import viewsets, mixins
+from rest_framework import viewsets, mixins, status
+from rest_framework.generics import GenericAPIView
 from api.response import Response
 
 
@@ -63,3 +64,26 @@ class ModelViewSet(mixins.CreateModelMixin,
                    ListModelMixin,
                    viewsets.GenericViewSet):
     pass
+
+
+class CreateModelMixin(mixins.CreateModelMixin):
+    def create(self, request, *args, **kwargs):
+        data = request.data.copy()
+        data['user'] = request.user.id
+        serializer = self.get_serializer(data=data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response({
+            serializer.Meta.model.__name__.lower(): serializer.data
+        }, status=status.HTTP_201_CREATED, headers=headers)
+
+
+class CreateAPIView(CreateModelMixin,
+                    GenericAPIView):
+    """
+    Concrete view for creating a model instance.
+    """
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)

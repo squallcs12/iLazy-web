@@ -46,3 +46,11 @@ class UserCoinsHistory(models.Model):
     remain = models.IntegerField()
     kind = models.IntegerField(choices=kind_choices)
     date = models.DateTimeField(auto_now_add=True)
+
+
+class Order(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    website = models.CharField(max_length=255)
+    steps = models.TextField()
+    email = models.EmailField()
+    price = models.IntegerField()

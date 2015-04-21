@@ -22,6 +22,10 @@ class UserApp(models.Model):
     app = models.ForeignKey(App)
     expires = models.DateField(null=True)
 
+    @property
+    def expires_str(self):
+        return self.expires.strftime("%b %d")
+
     class Meta:
         unique_together = (('user', 'app'), )
 

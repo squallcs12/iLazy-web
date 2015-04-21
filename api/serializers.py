@@ -27,10 +27,11 @@ class ResultSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class UserAppSerializer(serializers.ModelSerializer):
+    app = AppDetailSerializer(read_only=True)
 
     class Meta:
         model = models.UserApp
-        fields = ('id', 'user', 'app', 'expires')
+        fields = ('id', 'user', 'app', 'expires', 'expires_str')
 
 
 Response.register_serializers(AppSerializer, AppDetailSerializer, ResultSerializer, UserAppSerializer)

@@ -1,4 +1,5 @@
 from django.db import models
+from django import forms
 from rest_framework.response import Response as OriginResponse
 
 
@@ -21,6 +22,17 @@ class Response(OriginResponse):
                     data[key] = self.serialize_object(value, context)
             if 'errors' in data:
                 data['success'] = False
+                if isinstance(data['errors'], (forms.Form, forms.ModelForm)):
+                    errors = []
+                    form = data['errors']
+                    for error in form.non_field_errors():
+                        pass
+                    for field in form:
+                        error = {
+                            field.name: field.errors
+                        }
+                        errors.append(error)
+                    data['errors'] = errors
             else:
                 data['success'] = True
         super(Response, self).__init__(data=data, **kwargs)

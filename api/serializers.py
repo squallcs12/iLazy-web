@@ -1,3 +1,4 @@
+from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
 from api import models
@@ -40,4 +41,11 @@ class OrderSerializer(serializers.ModelSerializer):
         fields = ('id', 'user', 'website', 'steps', 'email', 'price')
 
 
-Response.register_serializers(AppSerializer, AppDetailSerializer, ResultSerializer, UserAppSerializer)
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = get_user_model()
+        fields = ('id', 'username')
+
+
+Response.register_serializers(AppSerializer, AppDetailSerializer, ResultSerializer, UserAppSerializer,
+                              UserSerializer)

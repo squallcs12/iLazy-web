@@ -46,6 +46,7 @@ INSTALLED_APPS = (
 
     'api',
     'common',
+    'apps.tangthuvien',
 )
 
 MIDDLEWARE_CLASSES = (

@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from apps.tangthuvien import models
+
+
+admin.site.register(models.Topic)
+admin.site.register(models.TopicUser)

@@ -6,6 +6,7 @@ class Topic(models.Model):
     topic_id = models.PositiveIntegerField()
     last_post_id = models.PositiveIntegerField(default=0)
     last_page_number = models.PositiveIntegerField(default=0)
+    title = models.CharField(max_length=255)
 
 
 class TopicUser(models.Model):

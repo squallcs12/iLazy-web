@@ -43,6 +43,7 @@ INSTALLED_APPS = (
     'oauth2_provider',
     'django_extensions',
     'rest_framework_swagger',
+    'push_notifications',
 
     'api',
     'common',
@@ -129,3 +130,7 @@ REST_FRAMEWORK = {
 
 BROKER_URL = 'redis://localhost:6379/0'
 
+PUSH_NOTIFICATIONS_SETTINGS = {
+    "GCM_API_KEY": "<your api key>",
+    "APNS_CERTIFICATE": os.path.join(BASE_DIR, "cert.pem"),
+}
